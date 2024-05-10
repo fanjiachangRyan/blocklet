@@ -10,15 +10,14 @@
     "bundle": "tsc --noEmit && npm run bundle:client && npm run bundle:api",
     "bundle:client": "vite build",
     "bundle:api": "npm run clean && tsc -p tsconfig.api.json && blocklet bundle --zip --create-release",
-    "deploy": "npm run bundle && blocklet deploy .blocklet/bundle",
+    "deploy": "npm run bundle && blocklet deploy .blocklet/bundle --app-id zNKp1TkRaJMfUer5dH92fGrTD9HoTFbHRsdK",
     "upload": "npm run bundle && blocklet upload .blocklet/release/blocklet.json",
     "prepare": "husky install",
     "bump-version": "zx --quiet scripts/bump-version.mjs"
   },
   "lint-staged": {
     "*.{mjs,js,jsx,ts,tsx}": [
-      "prettier --write",
-      "eslint"
+      "prettier --write"
     ],
     "*.{css,less,scss,json,graphql}": [
       "prettier --write"
@@ -37,6 +36,10 @@
     ]
   },
   "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@mui/material": "^5.15.17",
+    "@mui/styles": "^5.15.17",
     "@arcblock/did-auth": "^1.18.108",
     "@arcblock/did-auth-storage-nedb": "^1.7.1",
     "@blocklet/sdk": "^1.16.20",
@@ -52,7 +55,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.21.0",
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "swr": "^2.2.5"
   },
   "devDependencies": {
     "@arcblock/eslint-config": "^0.2.4",

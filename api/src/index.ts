@@ -10,6 +10,7 @@ import fallback from '@blocklet/sdk/lib/middlewares/fallback';
 
 import logger from './libs/logger';
 import routes from './routes';
+import fs from 'fs';
 
 dotenv.config();
 
@@ -26,6 +27,27 @@ app.use(cors());
 const router = express.Router();
 router.use('/api', routes);
 app.use(router);
+
+app.get('/getUser', (_, res) => {
+  try {
+    const jsonStr = fs.readFileSync(path.join(__dirname, './data.json'), 'utf-8');
+    const jsonData = JSON.parse(jsonStr);
+
+    res.send(JSON.stringify({ code: 0, data: jsonData, msg: 'success' }));
+  } catch (e) {
+    res.send(JSON.stringify({ code: -1, data: null, msg: 'error' }));
+  }
+});
+
+app.post('/updateUser', (req, res) => {
+  try {
+    fs.writeFileSync(path.join(__dirname, './data.json'), JSON.stringify(req.body));
+
+    res.send(JSON.stringify({ code: 0, data: null, msg: 'success' }));
+  } catch (e) {
+    res.send(JSON.stringify({ code: -1, data: null, msg: 'error' }));
+  }
+});
 
 const isProduction = process.env.NODE_ENV === 'production' || process.env.ABT_NODE_SERVICE_ENV === 'production';
 

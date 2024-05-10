@@ -12,6 +12,9 @@ function Home() {
       <Link className="app-link" to="/about">
         About
       </Link>
+      <Link className="app-link" to="/setting">
+        Setting
+      </Link>
       <a className="app-link" href="https://developer.blocklet.io/docs/" target="_blank" rel="noopener noreferrer">
         Learn Blocklet
       </a>
